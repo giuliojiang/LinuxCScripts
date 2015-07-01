@@ -26,6 +26,8 @@ int hasTrailingSlash(char* s)
 
 int runTest(char* binPath)
 {
+    
+    
     char* fileName = (char*) calloc(BUFFER_SIZE, sizeof(char));
     if (fileName == NULL)
     {
@@ -47,6 +49,10 @@ int runTest(char* binPath)
         perror("malloc");
         exit(1);
     }
+    
+    // delete gvki-0
+    sprintf(command, "rm -rf gvki-0");
+    printf("Running command %s\n", command);
     
     // generate command to be executed
     if (hasTrailingSlash(binPath))
