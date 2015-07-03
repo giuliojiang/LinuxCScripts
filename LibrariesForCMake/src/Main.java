@@ -14,7 +14,7 @@ public class Main {
 		while (input.hasNext())
 		{
 			String temp = input.nextLine();
-			out.print("\"${LLVM_LIBDIR}/" + temp + "\" ");
+			out.print("-l${LLVM_LIBDIR}/" + temp + " ");
 		}
 	}
 
