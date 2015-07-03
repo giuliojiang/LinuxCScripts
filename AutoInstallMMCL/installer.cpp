@@ -85,12 +85,36 @@ int main()
     out << "make -j" << MAKE_J << endl;
 
     // spir
+    out << "mkdir " << HOME << "/metamorphicCL/spir" << endl;
+    out << "mkdir " << HOME << "/metamorphicCL/spir/headers" << endl;
+    out << "cd " << HOME << "/metamorphicCL/spir/headers" << endl;
+    out << "wget https://github.com/KhronosGroup/SPIR-Tools/raw/master/headers/opencl_spir.h" << endl;
     
     // gpuverify
+    out << "cd " << HOME << "/metamorphicCL/" << endl;
+    out << "git clone https://github.com/mc-imperial/gpuverify.git GPUVerify" << endl;
     
     // metamorphiccl
+    out << "cd " << HOME << "/metamorphicCL/" << endl;
+    out << "git clone https://gitlab.doc.ic.ac.uk/multicore/metamorphiccl.git" << endl;
+   
+    out << "mkdir " << HOME << "/metamorphicCL/metamorphicCLbuild/" << endl;
+    out << "cd " << HOME << "/metamorphicCL/metamorphicCLbuild/" << endl;
+    out << "cmake -DCMAKE_BUILD_TYPE=Release -DLLVM_CONFIG=./../llvm/build/bin/llvm-config " << HOME << "/metamorphicCL/metamorphiccl/libtooling/" << endl;
+    out << "make -j" << MAKE_J << endl;
     
     // findtools
+    ofstream ftools;
+    ftools.open((HOME + "/metamorphicCL/metamorphiccl/python/findtools.py").c_str());
+    ftools << "import sys" << endl;
+    ftools << "rootDir = r\"" << HOME << "/metamorphicCL/\"" << endl;
+    ftools << "metamorphicclDir = rootDir + r\"metamorphiccl/\"" << endl;
+    ftools << "gpuverify = \"" << HOME << "/metamorphicCL/GPUVerify/\"" << endl;
+    ftools << "sys.path.append(gpuverify)" << endl;
+    ftools << "rewriterBinDir = rootDir + r\"metamorphicCLbuild/\"" << endl;
+    ftools << "llvmBinDir = rootDir + r\"llvm/build/bin/\"" << endl;
+    ftools << "spirToolsDir = rootDir + r\"spir/\"" << endl;
+    
     
     out.close();
     
