@@ -6,12 +6,14 @@ import os
 #You should copy this script and list.txt inside AMDAPP/bin directory and
 #run it from there.
 
-gvkiWrapperScript = '/home/gj5/opencl/gvki-giulio-p/scripts/gvki.py'
-gvkiPreloadLibrary = '/home/gj5/opencl/gvki-build/lib/libGVKI_preload.so'
-gvkiWorkingDirectory = '/home/gj5/opencl/AMDAPP/bin/'
-amdBinx86Directory = '/home/gj5/opencl/AMDAPP/bin/x86_64' + '/'
+gvkiWrapperScript = '/home/gj5/ocl/gvki-giulio-p/scripts/gvki.py'
+gvkiPreloadLibrary = '/home/gj5/ocl/gvki-build/lib/libGVKI_preload.so'
+gvkiWorkingDirectory = '/home/gj5/ocl/AMD_benchmarks/opencl/bin/'
+amdBinx86Directory = '/home/gj5/ocl/AMD_benchmarks/opencl/bin/x86_64/'
 
 listFile = open('list.txt','r')
+
+os.chdir(amdBinx86Directory)
 
 for programName in listFile:
     command = []
@@ -25,4 +27,4 @@ for programName in listFile:
     command.append(amdBinx86Directory + programName)
     print(command)
     subprocess.call(command)
-    os.system("mv gvki-0 gvki-" + programName)
+    subprocess.call(['mv', os.path.abspath(gvkiWorkingDirectory + os.sep + 'gvki-0'), os.path.abspath(gvkiWorkingDirectory + os.sep + 'gvki-' + programName)])
